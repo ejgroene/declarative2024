@@ -1,3 +1,4 @@
+
 %%%%%%%% Problem Instance %%%%%%%%
 
 % edge(From, To, Cost). We use facts.
@@ -34,34 +35,43 @@ path(C)  :-  path(B),  step(B, C).
 #minimize { C, A, B  :  step(A, B),  edge(A, B, C) }.
 
 
-%%%% Tests %%%%
-assert("6 nodes")            :-  { node(N) } = 6.
+%%%% Ad-Hoc Tests %%%%
+assert("6 nodes")            :-  { node(_) } = 6.
+assert("no self reference")  :-  { edge(N, N, _) }  =  0.
 assert("incident in", N)     :-  node(N),  edge(_, N, _).
 assert("incident out", N)    :-  node(N),  edge(N, _, _).
+assert("bi-edges", N)        :-  edge(N, _, _), edge(_, N, _).
 assert("edge costs", A, B)   :-  edge(A, B, C),  C > 0,  C < 10.
-assert("cycle cost")         :-  10 < #sum { C, A, B  :  step(A, B),  edge(A, B, C) } < 14.
-assert("no self reference")  :-  { edge(N, N, _) } = 0.
+assert("cycle cost")         :-  10  <  #sum { C, A, B  :  step(A, B),  edge(A, B, C) }  <  14.
 assert("number of steps")    :-  { step(A, B) } = S,  S = { node(N) }.
+assert("steps")              :-  { step(1,2; 2,5; 5,6; 6,3; 3,4; 4,1) } = 6.
 models(3).
 
 ensure(assert(
     "6 nodes";
-    "cycle cost";
     "no self reference";
     "incident in", N;
     "incident out", N;
-    "number of steps"
+    "bi-edges", N;
+    "cycle cost";
+    "number of steps";
+    "steps"
     ))  :-
-        node(N).                          % careful: no nodes, no ensure's
+        node(N).                          % careful: no nodes, no ensure's.
 
-ensure(node(1; 2; 3; 4; 5; 6)).           % safest way
+ensure(node(1; 2; 3; 4; 5; 6)).           % safest way to make sure there are nodes.
 
 ensure(assert("edge costs", A, B))  :-
-    edge(A, B, _).                        % careful: no edges, no ensure's
+    edge(A, B, _).                        % careful: no edges, no ensure's.
+
 
 % Problems with these tests:
+%
+% 0. Test "steps" fails.  Why?  We can't fix it.  Why?
 % 1. test fixtures are fixed; we want different graphs for testing
 % 2. use of ensure is cumbersome
+% 3. use #show for every cardinality of assert
+%
 % It does work for general input validation however.
 %
 % Next: test #program's.
@@ -72,5 +82,3 @@ ensure(assert("edge costs", A, B))  :-
 #show assert/1.
 #show assert/2.
 #show assert/3.
-
-

@@ -12,7 +12,7 @@ node(N)  :-  edge(_, N, _).    % disjunction/or
 step(A, B)  :  edge(A, B, _).
 
 % If you have one step, choose a connected one, but not back.
-step(B, C)  :  edge(B, C, _),  C <> A   :-   step(A, B).
+step(B, C)  :  edge(B, C, _)   :-   step(A, B).
 
 % Path to given node via step's. We use a disjunctive rule with conjunction.
 path(B)  :-  step(_, B).
@@ -28,14 +28,21 @@ path(C)  :-  path(B),  step(B, C).
 
 
 #program general_checks.
-assert(@all("no self reference"))  :-  { edge(N, N, _) }  =  0.
+assert(@all("no self reference"))  :-  { edge(N, N, _) } = 0.
 assert(@all("incident in", N))     :-  node(N),  edge(_, N, _).
 assert(@all("incident out", N))    :-  node(N),  edge(N, _, _).
-assert(@all("bi-edges", N))        :-  edge(N, _, _),  edge(_, N, _).
+assert(@all("bi-edges", N))        :-  edge(N, _, _), edge(_, N, _).
 assert(@all("edge costs", A, B))   :-  edge(A, B, C),  C > 0,  C < 10.
-assert(@all("cycle cost"))         :-  10  <=  #sum { C, A, B  :  step(A, B), edge(A, B, C) }  <  100.
-assert(@all("number of steps"))    :-  { step(A, B) } = S,  S = { node(N) }.
+node_count(C)  :-  C = { node(_) }.
+assert(@all("cycle cost", N))      :-  
+    node_count(N),
+    N <= #sum { C, A, B  :  step(A, B),  edge(A, B, C) } < 100.
+assert(@all("number of steps", N)) :- 
+    node_count(N),
+    N = { step(A, B) }.
 
+
+% Solutions
 
 #program test_the_big_one(base, general_checks).
 edge(1 ,2 ,2). edge(2 ,4 ,2). edge(3 ,1 ,3). edge(4 ,1 ,1). edge(5 ,3 ,2). edge(6 ,2 ,4).
@@ -52,21 +59,15 @@ models(1).
 
 
 #program test_minimal_graph(base, general_checks).
-edge(1, 2, 1). edge(2, 1 ,1).                            % problem instance
+edge(1, 2, 1). edge(2, 1 ,1).                             % problem instance
 assert(@all("2 nodes"))      :-  { node(N) } = 2.
 models(1).
 
 
-% Problem assignments:
-%
-% Run the tests with: 
-%
-%   $ asp-tests hamiltonian-cycle-2.lp
-%
-% 1. the "number of steps" test issues a warning; fix the test.
-% 2. the "cycle cost" test fails; fix the test.
-% 3. problem instance with only two nodes does not work; fix the code.
+% One more exercise, for after the session. Next test fails...
 
+#program test_single_node_graph(base, general_checks).
+edge(1, 1, 1).                                            % problem instance
+assert(@all("1 nodes"))      :-  { node(N) } = 1.
+models(1).
 
-%%%% Output Control %%%%
-#show step/2.
