@@ -21,7 +21,7 @@ Blockers and privacy protections might get in the way.
 
 Run the tests in `hamiltonian-cycle-*.lp` with:
 
-  $ asp-tests --silent hamiltonian-cycle-*.lp
+    $ asp-tests --silent hamiltonian-cycle-*.lp
 
 (--silent skips the Python in-source tests)
 
