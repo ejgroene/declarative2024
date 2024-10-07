@@ -21,7 +21,7 @@ special(B)  :-  beer(B, A),  A > 5.
 % constraint, it cannot be that...
 :-  drink(B, A),  A = 0.
 
-% conditional literals ('such that')
+% conditional literals ('such that') and aggregate
 specials(T)  :-  T = { beer(B, A)  :  special(B) }.
 
 % output control
