@@ -10,7 +10,7 @@ This repository contains support materials for the session:
 
 # Codespace
 
-Start the Codespace using Code -> Codespaces.
+Start the Codespace using Code -> Codespaces -> `Create Codespace on main`.
 
 Blockers and privacy protections might get in the way.
 
