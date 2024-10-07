@@ -41,19 +41,21 @@ assert(@all("number of steps"))    :-  { step(A, B) } = S,  S = { node(N) }.
 edge(1 ,2 ,2). edge(2 ,4 ,2). edge(3 ,1 ,3). edge(4 ,1 ,1). edge(5 ,3 ,2). edge(6 ,2 ,4).
 edge(1 ,3 ,3). edge(2 ,5 ,2). edge(3 ,4 ,2). edge(4 ,2 ,2). edge(5 ,4 ,2). edge(6 ,3 ,3).
 edge(1 ,4 ,1). edge(2 ,6 ,4). edge(3 ,5 ,2).                edge(5 ,6 ,1). edge(6 ,5 ,1).
-assert("steps")              :-  { step(1,2; 2,5; 5,6; 6,3; 3,4; 4,1) } = 6.
+assert("steps")  :-  { step(1,2; 2,5; 5,6; 6,3; 3,4; 4,1) } = 6.
 models(3).
 
 
 #program test_small_graph_of_three_nodes(base, general_checks).
 edge(1, 2, 1).  edge(2, 3, 1).  edge(3, 1, 1).            % problem instance
 assert(@all("3 nodes"))  :-  { node(N) }  =  3.
+assert("steps")  :-  { step(1,2; 2,3; 3,1) } = 3.
 models(1).
 
 
 #program test_minimal_graph(base, general_checks).
 edge(1, 2, 1). edge(2, 1 ,1).                            % problem instance
-assert(@all("2 nodes"))      :-  { node(N) } = 2.
+assert(@all("2 nodes"))  :-  { node(N) } = 2.
+assert("steps")  :-  { step(1,2; 2,1) } = 2.
 models(1).
 
 
