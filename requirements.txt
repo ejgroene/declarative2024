@@ -1,1 +1,1 @@
-asp-selftest >= 0.0.17
+asp-selftest >= 0.0.18
