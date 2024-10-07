@@ -1,5 +1,6 @@
-# declarative2024
-Session on Declarative 2024 on In-Source Testing in Answer Set Programming (ASP)
+# declarative2024: In-Source Testing in ASP
+
+Session on [Declarative 2024](https://declarative.amsterdam/program) on In-Source Testing in Answer Set Programming (ASP)
 
 This repository contains support materials for the session:
 
@@ -7,15 +8,19 @@ This repository contains support materials for the session:
 2. Codespace for working with asp-selftest and the examples.
 3. slides, if I find a way to do that in markdown.
 
-Start the Codespace.
+# Codespace
 
+Start the Codespace using Code -> Codespaces.
 
-Run the tests in `hamiltonian-cycle.lp` with:
+Blockers and privacy protections might get in the way.
 
-  $ clingo 0 hamiltonian-cycle.lp
+ * Safari: does not work
+ * Firefox: click the shield next to the URL and turn of `advanced privacy protections`.
 
-Run the tests in `hamiltonian-cycle-2.lp` (and `hamiltonian-cycle-3.lp`) with:
+# Run tests
 
-  $ asp-tests 0 hamiltonian-cycle-2.lp
+Run the tests in `hamiltonian-cycle-*.lp` with:
+
+  $ asp-tests 0 hamiltonian-cycle-*.lp
 
 At the end of each file is an explanation of the problems (failing tests) and challenges to fix the test or the code.
