@@ -1,5 +1,5 @@
 {"image":"mcr.microsoft.com/devcontainers/universal:2",
-"postCreateCommand": "pip3 install --user -r requirements.txt",
+"postCreateCommand": "pip3 install --user -r requirements.txt & conda install --yes --channel potassco clingo",
 "customizations": {
 	"vscode": {
 		"extensions": [
