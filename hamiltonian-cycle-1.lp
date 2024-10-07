@@ -69,7 +69,7 @@ ensure(assert("edge costs", A, B))  :-
 %
 % 0. Test "steps" fails.  Why?  We can't fix it.  Why?
 % 1. test fixtures are fixed; we want different graphs for testing
-% 2. use of ensure is cumbersome
+% 2. use of ensure is cumbersome and error prone
 % 3. use #show for every cardinality of assert
 %
 % It does work for general input validation however.
