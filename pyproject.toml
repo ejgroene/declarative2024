@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=64.0", "setuptools_scm>=8"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "declarative2024"
+dynamic = ['version']
+authors = [ { name="Erik Groeneveld", email="ejgroene@ieee.org" }, ]
+description = "Declarative Amsterdam 2024 session materials"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: ASP",
+    "License :: OSI Approved :: GNU General Public License (GPL)",
+    "Operating System :: OS Independent",
+]
+dependencies=[
+    'clingo >= 5.7.1',
+    'asp-selftest >= 0.0.14',
+]
+
+
+[tool.setuptools_scm]
+# empty is enough to avtivate its magic of including a version from the latest tag
+# additionally it adds all files under version control to the package
