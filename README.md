@@ -17,6 +17,16 @@ Blockers and privacy protections might get in the way.
  * Safari: does not work
  * Firefox: click the shield next to the URL and turn of `advanced privacy protections`.
 
+
+# Own Python Environment
+
+    $ mkdir decl24
+    $ cd decl24
+    $ python -m venv .env
+    $ source .env/bin/activate
+    $ pip install git+https://github.com/ejgroene/declarative2024.git
+
+
 # Run tests
 
 Run the tests in `hamiltonian-cycle-*.lp` with:
